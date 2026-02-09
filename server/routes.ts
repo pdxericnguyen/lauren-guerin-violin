@@ -26,7 +26,7 @@ export async function registerRoutes(
       await resend.emails.send({
         from,
         to,
-        replyTo: input.email,
+        reply_to: input.email,
         subject: `New inquiry from ${input.name}`,
         text: `Name: ${input.name}\nEmail: ${input.email}\n\nMessage:\n${input.message}`,
       });

@@ -9,6 +9,13 @@ import { Music2, GraduationCap, Heart, Instagram, Youtube, Star } from "lucide-r
 import { motion } from "framer-motion";
 
 import laurenPhoto from "@assets/257ADE3B-0388-40A5-9F6E-A34A60C4729A_1768423584638.jpeg";
+
+const teachingGalleryImages = [
+  { src: "", alt: "Teaching gallery image 1" },
+  { src: "", alt: "Teaching gallery image 2" },
+  { src: "", alt: "Teaching gallery image 3" },
+];
+
 export default function Home() {
   const scrollToContact = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }  );
@@ -22,6 +29,9 @@ export default function Home() {
   const staggerChildren = {
     visible: { transition: { staggerChildren: 0.1 } }
   };
+  const visibleTeachingGalleryImages = teachingGalleryImages.filter(
+    (image) => image.src.trim().length > 0,
+  );
 
   return (
     <div className="min-h-screen bg-background font-sans selection:bg-primary/20">
@@ -143,6 +153,20 @@ export default function Home() {
             title="Teaching & Lessons" 
             subtitle="Private instruction tailored to nurture each student's unique musical voice."
           />
+
+          {visibleTeachingGalleryImages.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+              {visibleTeachingGalleryImages.map((image) => (
+                <div key={image.alt} className="relative aspect-[4/3] rounded-xl overflow-hidden border bg-white shadow-sm">
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <motion.div

@@ -4,6 +4,12 @@ import { useMemo, useState } from "react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Button } from "@/components/ui/button";
 
+const eventsGalleryImages = [
+  { src: "", alt: "Event gallery image 1" },
+  { src: "", alt: "Event gallery image 2" },
+  { src: "", alt: "Event gallery image 3" },
+];
+
 export function EventsWeddingsSection() {
   const categories = useMemo(
     () => [
@@ -92,6 +98,9 @@ export function EventsWeddingsSection() {
   );
 
   const [openCategory, setOpenCategory] = useState<string>("classical");
+  const visibleEventsGalleryImages = eventsGalleryImages.filter(
+    (image) => image.src.trim().length > 0,
+  );
 
   return (
     <section id="events" className="py-24 px-6 bg-muted/40 scroll-mt-24">
@@ -100,6 +109,20 @@ export function EventsWeddingsSection() {
           title="Events & Weddings"
           subtitle="Elegant live violin for ceremonies, cocktail hours, and unforgettable gatherings."
         />
+
+        {visibleEventsGalleryImages.length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+            {visibleEventsGalleryImages.map((image) => (
+              <div key={image.alt} className="relative aspect-[4/3] rounded-xl overflow-hidden border bg-white shadow-sm">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Two-column overview */}
         <div className="grid md:grid-cols-2 gap-8">
@@ -161,17 +184,17 @@ export function EventsWeddingsSection() {
               <h4 className="font-serif text-xl mt-2">Standard Song Requests</h4>
               <p className="text-sm text-muted-foreground mt-2">Includes repertoire and up to 5 custom arrangements.</p>
               <p className="text-sm text-muted-foreground mt-2"></p>
-              <p className="text-2xl font-semibold mt-4">$350</p>
+              <p className="text-2xl font-semibold mt-4">$500</p>
             </div>
 
             <div className="rounded-2xl border bg-white p-7 shadow-sm">
               <p className="text-xs tracking-[0.2em] text-muted-foreground">PREMIUM</p>
               <h4 className="font-serif text-xl mt-2">Premium / Fully Curated</h4>
-              <p className="text-sm text-muted-foreground mt-2">Includes repertoire and 10+ custom arrangements, with full musical planning support.</p>
+              <p className="text-sm text-muted-foreground mt-2">Includes repertoire and 10 custom arrangements, with full musical planning support.</p>
               <p className="text-sm text-muted-foreground mt-2"></p>
               <div className="mt-4 space-y-1">
-                <p className="text-2xl font-semibold">$500</p>
-                <p className="text-sm text-muted-foreground">Fully curated event: <span className="font-medium text-foreground">$750</span></p>
+                <p className="text-2xl font-semibold">$1000</p>
+                <p className="text-sm text-muted-foreground">Fully curated event: <span className="font-medium text-foreground">$1500</span></p>
               </div>
             </div>
           </div>

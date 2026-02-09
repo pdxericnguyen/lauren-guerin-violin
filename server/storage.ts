@@ -7,6 +7,10 @@ export interface IStorage {
 
 export class DatabaseStorage implements IStorage {
   async createMessage(insertMessage: InsertMessage): Promise<Message> {
+    if (!db) {
+      throw new Error("DB is disabled");
+    }
+
     const [message] = await db.insert(messages).values(insertMessage).returning();
     return message;
   }
