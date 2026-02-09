@@ -103,8 +103,8 @@ export default function Reserve() {
               <CardContent className="p-6 flex flex-col h-full">
                 <div className="space-y-2">
                   <h2 className="font-serif text-xl">{p.name}</h2>
-                  <p className="text-xl font-normal text-foreground leading-tight">{p.priceLabel}</p>
-                  <p className="text-xl font-normal text-muted-foreground leading-tight">{p.depositLabel}</p>
+                  <p className="text-lg font-normal text-foreground leading-tight">{p.priceLabel}</p>
+                  <p className="text-base font-normal text-muted-foreground leading-tight">{p.depositLabel}</p>
                 </div>
 
                 <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
