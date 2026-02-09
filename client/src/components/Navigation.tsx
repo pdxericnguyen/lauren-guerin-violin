@@ -69,7 +69,7 @@ export function Navigation() {
             </a>
           ))}
 
-          {/* Reserve / Pay Deposits */}
+          {/* Payment */}
           <Link href="/reserve">
             <a
               className={cn(
@@ -79,7 +79,7 @@ export function Navigation() {
                   ? "bg-primary text-primary-foreground hover:bg-primary/90"
                   : "bg-white text-gray-900 hover:bg-gray-100"
               )}
-              aria-label="Go to payment page"
+              aria-label="Payment your date and pay deposit"
             >Payment</a>
           </Link>
         </div>
@@ -119,7 +119,7 @@ export function Navigation() {
                   "mt-2 w-full rounded-none font-serif tracking-widest uppercase",
                   location === "/reserve" && "opacity-90"
                 )}
-                aria-label="Go to payment page"
+                aria-label="Reserve your date and pay deposit"
                 onClick={() => setIsOpen(false)}
               >Payment</a>
             </Link>
