@@ -21,7 +21,7 @@
   --popover: 0 0% 100%;
   --popover-foreground: 200 10% 20%;
 
-  --primary: 200 7% 53%; /* #7d8a8f - Slate Gray */
+  --primary: 200 10% 44%; /* Darker slate for stronger CTA contrast */
   --primary-foreground: 0 0% 100%;
 
   --secondary: 198 12% 85%; /* Lighter version of muted #b7c3c8 */
@@ -36,9 +36,20 @@
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
 
+  --card-border: 200 5% 84%;
+  --popover-border: 200 5% 84%;
+  --primary-border: hsl(200 10% 36%);
+  --secondary-border: hsl(200 8% 78%);
+  --muted-border: hsl(200 6% 84%);
+  --accent-border: hsl(198 12% 68%);
+  --destructive-border: hsl(0 72% 52%);
+  --button-outline: hsl(200 8% 74%);
+  --sidebar-primary-border: hsl(200 10% 36%);
+  --sidebar-accent-border: hsl(198 12% 68%);
+
   --border: 200 5% 85%;
   --input: 200 5% 85%;
-  --ring: 200 7% 53%;
+  --ring: 200 10% 44%;
 
   --radius: 0.25rem;
 }

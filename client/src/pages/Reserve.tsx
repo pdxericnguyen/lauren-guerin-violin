@@ -1,6 +1,7 @@
 import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 type PackageOption = {
   name: string;
@@ -52,52 +53,34 @@ const PACKAGES: PackageOption[] = [
 ];
 
 export default function Reserve() {
+  const activeTabClass = cn(buttonVariants({ variant: "default" }), "cursor-default");
+  const lessonsTabClass = buttonVariants({ variant: "secondary" });
+  const paymentButtonClass = cn(buttonVariants({ variant: "default" }), "w-full");
+
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-5xl mx-auto px-6 py-10">
-        {/* Top row */}
-        <div className="flex items-center justify-between gap-4">
-          <Link href="/">
-            <a className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              ← Back to site
-            </a>
-          </Link>
-          <a
-            href="mailto:guerinlaurenllg@gmail.com"
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            guerinlaurenllg@gmail.com
-          </a>
-        </div>
+        <section>
+          <h1 className="font-serif text-4xl md:text-5xl mt-6">Pay Deposit</h1>
+          <p className="mt-4 max-w-2xl text-muted-foreground">
+            Reserve your wedding or event date with a deposit. Deposits are applied toward your total, and the remaining
+            balance is invoiced closer to your event date.
+          </p>
 
-        {/* Payment toggle */}
-        <div className="mt-6 flex flex-wrap items-center gap-3">
-          <Button variant="default" disabled>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <span className={activeTabClass} aria-current="page">
             Pay deposit
-          </Button>
-          <Link href="/lessons/pay">
-            <Button variant="secondary">Pay for lessons</Button>
+          </span>
+          <Link href="/lessons/pay" className={lessonsTabClass}>
+            Pay for lessons
           </Link>
-          <Link href="/">
-            <Button variant="outline">Back to home</Button>
+          <Link href="/" className={buttonVariants({ variant: "outline" })}>
+            Back to home
           </Link>
-        </div>
+          </div>
+        </section>
 
-        <h1 className="font-serif text-4xl md:text-5xl mt-6">Pay Deposit</h1>
-        <p className="mt-4 max-w-2xl text-muted-foreground">
-          Reserve your wedding or event date with a deposit. Deposits are applied toward your total, and the remaining
-          balance is invoiced closer to your event date.
-        </p>
-
-        <ul className="mt-4 list-disc pl-5 space-y-1 text-sm text-muted-foreground">
-          <li>Your deposit secures your date and package selection.</li>
-          <li>Deposits vary by package and are applied toward your total.</li>
-          <li>The remaining balance is invoiced closer to your event date.</li>
-          <li>Fully curated packages include 3+ hours and expanded musical planning support.</li>
-          <li>A $50 travel fee applies only to non-premium packages for locations more than one hour outside of Portland.</li>
-        </ul>
-
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <section className="mt-10 grid gap-6 md:grid-cols-3">
           {PACKAGES.map((p) => (
             <Card key={p.name} className="h-full">
               <CardContent className="p-6 flex flex-col h-full">
@@ -118,8 +101,13 @@ export default function Reserve() {
                 )}
 
                 <div className="mt-auto pt-6">
-                  <a href={p.waveUrl} target="_blank" rel="noopener noreferrer">
-                    <Button className="w-full">Request This Package</Button>
+                  <a
+                    href={p.waveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={paymentButtonClass}
+                  >
+                    Pay Deposit
                   </a>
                   <p className="mt-3 text-xs text-muted-foreground">
                     Deposit is applied to your total. Remaining balance will be invoiced closer to your date.
@@ -128,7 +116,17 @@ export default function Reserve() {
               </CardContent>
             </Card>
           ))}
-        </div>
+        </section>
+
+        <section className="mt-10">
+          <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+            <li>Your deposit secures your date and package selection.</li>
+            <li>Deposits vary by package and are applied toward your total.</li>
+            <li>The remaining balance is invoiced closer to your event date.</li>
+            <li>Fully curated packages include 3+ hours and expanded musical planning support.</li>
+            <li>A $50 travel fee applies only to non-premium packages for locations more than one hour outside of Portland.</li>
+          </ul>
+        </section>
 
         <div className="mt-10 text-sm text-muted-foreground">
           Questions? Email{" "}

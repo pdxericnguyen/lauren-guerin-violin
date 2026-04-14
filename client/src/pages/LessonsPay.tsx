@@ -1,6 +1,7 @@
 import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 type LessonPack = {
   name: string;
@@ -31,61 +32,54 @@ const LESSON_PACKS: LessonPack[] = [
 ];
 
 export default function LessonsPay() {
+  const activeTabClass = cn(buttonVariants({ variant: "default" }), "cursor-default");
+  const depositTabClass = buttonVariants({ variant: "secondary" });
+  const paymentButtonClass = cn(buttonVariants({ variant: "default" }), "w-full");
+
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-5xl mx-auto px-6 py-10">
-        {/* Top row */}
-        <div className="flex items-center justify-between gap-4">
-          <Link href="/">
-            <a className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              ← Back to site
-            </a>
-          </Link>
-          <a
-            href="mailto:guerinlaurenllg@gmail.com"
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            guerinlaurenllg@gmail.com
-          </a>
-        </div>
+        <section>
+          <h1 className="font-serif text-4xl md:text-5xl mt-6">Pay for Lessons</h1>
+          <p className="mt-4 max-w-2xl text-muted-foreground">
+            Select a lesson pack below. You’ll be redirected to complete payment securely.
+          </p>
+          <p className="mt-2 max-w-2xl text-muted-foreground">
+            New students begin with a complimentary 30-minute trial lesson offered once per student. After your trial,
+            you may purchase a lesson pack below.
+          </p>
 
-        {/* Payment toggle */}
-        <div className="mt-6 flex flex-wrap items-center gap-3">
-          <Link href="/reserve">
-            <Button variant="secondary">Pay deposit</Button>
-          </Link>
-          <Button variant="default" disabled>
-            Pay for lessons
-          </Button>
-          <Link href="/">
-            <Button variant="outline">Back to home</Button>
-          </Link>
-        </div>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <Link href="/reserve" className={depositTabClass}>
+              Pay deposit
+            </Link>
+            <span className={activeTabClass} aria-current="page">
+              Pay for lessons
+            </span>
+            <Link href="/" className={buttonVariants({ variant: "outline" })}>
+              Back to home
+            </Link>
+          </div>
+        </section>
 
-        <h1 className="font-serif text-4xl md:text-5xl mt-6">Lesson Payments</h1>
-        <p className="mt-4 max-w-2xl text-muted-foreground">
-          Select a lesson pack below. You’ll be redirected to complete payment securely.
-        </p>
-        <p className="mt-2 max-w-2xl text-muted-foreground">
-          New students begin with a complimentary 30-minute trial lesson (offered once per student).
-          After your trial, you may purchase a lesson pack below.
-        </p>
-
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <section className="mt-10 grid gap-6 md:grid-cols-3">
           {LESSON_PACKS.map((pack) => (
             <Card key={pack.waveUrl} className="h-full">
               <CardContent className="p-6 flex flex-col h-full">
                 <div className="space-y-2">
                   <h2 className="font-serif text-xl">{pack.name}</h2>
+                  <p className="text-lg font-normal text-foreground leading-tight">{pack.priceLabel}</p>
                   <p className="text-sm text-muted-foreground">{pack.description}</p>
-                  <p className="text-sm text-muted-foreground">
-                    <span className="font-medium text-foreground">{pack.priceLabel}</span>
-                  </p>
                 </div>
 
                 <div className="mt-auto pt-6">
-                  <a href={pack.waveUrl} target="_blank" rel="noopener noreferrer">
-                    <Button className="w-full">Pay with Wave</Button>
+                  <a
+                    href={pack.waveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={paymentButtonClass}
+                  >
+                    Pay for lessons
                   </a>
                   <p className="mt-3 text-xs text-muted-foreground">
                     Scheduling is coordinated directly with Lauren after purchase.
@@ -94,7 +88,16 @@ export default function LessonsPay() {
               </CardContent>
             </Card>
           ))}
-        </div>
+        </section>
+
+        <section className="mt-10">
+          <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+            <li>Lesson packs are paid in advance and scheduling is coordinated directly with Lauren.</li>
+            <li>New students begin with a complimentary 30-minute trial lesson offered once per student.</li>
+            <li>Lesson packs are designed for ongoing study and can be used across future scheduled sessions.</li>
+            <li>If you have questions about fit or availability, email before purchasing.</li>
+          </ul>
+        </section>
 
         <div className="mt-10 text-sm text-muted-foreground">
           Questions? Email{" "}
