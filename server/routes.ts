@@ -5,7 +5,6 @@ import { storage } from "./storage";
 import { api } from "@shared/routes";
 import { z } from "zod";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function registerRoutes(
   httpServer: Server,
@@ -16,20 +15,26 @@ export async function registerRoutes(
       const input = api.contact.submit.input.parse(req.body);
 
       // Send email (Resend)
+      const resendApiKey = process.env.RESEND_API_KEY;
       const from = process.env.RESEND_FROM;
       const to = process.env.RESEND_TO;
 
-      if (!from || !to || !process.env.RESEND_API_KEY) {
-        return res.status(500).json({ error: "Email env vars not configured" });
+      if (!resendApiKey || !from || !to) {
+        return res.status(500).json({ message: "Email env vars not configured" });
       }
 
-      await resend.emails.send({
+      const resend = new Resend(resendApiKey);
+      const { error } = await resend.emails.send({
         from,
         to,
         reply_to: input.email,
         subject: `New inquiry from ${input.name}`,
         text: `Name: ${input.name}\nEmail: ${input.email}\n\nMessage:\n${input.message}`,
       });
+
+      if (error) {
+        return res.status(500).json({ message: "Email failed" });
+      }
 
       // Try to store message (non-blocking if DB is off)
       try {

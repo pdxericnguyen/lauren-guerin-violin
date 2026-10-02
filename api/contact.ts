@@ -1,14 +1,18 @@
 import { Resend } from "resend";
+import { api } from "../shared/routes";
 
 export default async function handler(req: any, res: any) {
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const { name, email, message } = req.body ?? {};
-
-  if (!name || !email || !message) {
-    return res.status(400).json({ message: "Missing required fields" });
+  const inputResult = api.contact.submit.input.safeParse(req.body);
+  if (!inputResult.success) {
+    const issue = inputResult.error.errors[0];
+    return res.status(400).json({
+      message: issue.message,
+      field: issue.path.join("."),
+    });
   }
 
   const resendApiKey = process.env.RESEND_API_KEY ?? process.env.RESEND_KEY ?? "";
@@ -36,9 +40,9 @@ export default async function handler(req: any, res: any) {
   const { error } = await resend.emails.send({
     from: resendFrom,
     to: resendTo,
-    reply_to: email,
-    subject: `New inquiry from ${name}`,
-    text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+    reply_to: inputResult.data.email,
+    subject: `New inquiry from ${inputResult.data.name}`,
+    text: `Name: ${inputResult.data.name}\nEmail: ${inputResult.data.email}\n\nMessage:\n${inputResult.data.message}`,
   });
 
   if (error) {
