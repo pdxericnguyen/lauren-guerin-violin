@@ -2,19 +2,16 @@ import { Navigation } from "@/components/Navigation";
 import { SectionHeading } from "@/components/SectionHeading";
 import { EventsWeddingsSection } from "@/components/EventsWeddingsSection";
 import { ContactForm } from "@/components/ContactForm";
+import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Music2, GraduationCap, Heart, Instagram, Youtube, Star } from "lucide-react";
 import { motion } from "framer-motion";
 
-import laurenPhoto from "@assets/257ADE3B-0388-40A5-9F6E-A34A60C4729A_1768423584638.jpeg";
+import { getVisibleGalleryImages, teachingGalleryImages } from "@/data/gallery";
 
-const teachingGalleryImages = [
-  { src: "", alt: "Teaching gallery image 1" },
-  { src: "", alt: "Teaching gallery image 2" },
-  { src: "", alt: "Teaching gallery image 3" },
-];
+import laurenPhoto from "@assets/257ADE3B-0388-40A5-9F6E-A34A60C4729A_1768423584638.jpeg";
 
 export default function Home() {
   const scrollToContact = () => {
@@ -29,9 +26,7 @@ export default function Home() {
   const staggerChildren = {
     visible: { transition: { staggerChildren: 0.1 } }
   };
-  const visibleTeachingGalleryImages = teachingGalleryImages.filter(
-    (image) => image.src.trim().length > 0,
-  );
+  const visibleTeachingGalleryImages = getVisibleGalleryImages(teachingGalleryImages);
 
   return (
     <div className="min-h-screen bg-background font-sans selection:bg-primary/20">
@@ -369,19 +364,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 bg-gray-900 text-gray-400 text-center text-sm">
-        <div className="container mx-auto px-6">
-          <p>© 2026 Lauren Guerin · Violinist & Teacher · Lauren Guerin</p>
-
-          <p className="mt-3">
-            If the contact form is unavailable, you may reach her directly at{" "}
-            <a href="mailto:guerinlaurenllg@gmail.com" className="underline hover:text-white">
-              guerinlaurenllg@gmail.com
-            </a>.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
 );
 }

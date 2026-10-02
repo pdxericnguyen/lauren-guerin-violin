@@ -3,12 +3,7 @@
 import { useMemo, useState } from "react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Button } from "@/components/ui/button";
-
-const eventsGalleryImages = [
-  { src: "", alt: "Event gallery image 1" },
-  { src: "", alt: "Event gallery image 2" },
-  { src: "", alt: "Event gallery image 3" },
-];
+import { eventsGalleryImages, getVisibleGalleryImages } from "@/data/gallery";
 
 export function EventsWeddingsSection() {
   const categories = useMemo(
@@ -98,9 +93,7 @@ export function EventsWeddingsSection() {
   );
 
   const [openCategory, setOpenCategory] = useState<string>("classical");
-  const visibleEventsGalleryImages = eventsGalleryImages.filter(
-    (image) => image.src.trim().length > 0,
-  );
+  const visibleEventsGalleryImages = getVisibleGalleryImages(eventsGalleryImages);
 
   return (
     <section id="events" className="py-24 px-6 bg-muted/40 scroll-mt-24">
