@@ -15,7 +15,7 @@ type PackageOption = {
 const PACKAGES: PackageOption[] = [
   {
     name: "Wedding/Event - Starter Package",
-    priceLabel: "$250",
+    priceLabel: "$500",
     depositLabel: "$150 reservation deposit",
     waveUrl: "https://link.waveapps.com/t4xksq-gf73wa",
     includes: [
@@ -27,7 +27,7 @@ const PACKAGES: PackageOption[] = [
   },
   {
     name: "Wedding/Event - Standard Package",
-    priceLabel: "$500",
+    priceLabel: "$750",
     depositLabel: "$250 reservation deposit",
     waveUrl: "https://link.waveapps.com/vgfzcx-3wzgvw",
     includes: [

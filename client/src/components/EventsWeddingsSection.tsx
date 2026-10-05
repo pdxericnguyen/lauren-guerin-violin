@@ -166,7 +166,7 @@ export function EventsWeddingsSection() {
               <h4 className="font-serif text-xl mt-2">Starter Song Request</h4>
               <p className="text-sm text-muted-foreground mt-2">Includes repertoire and 1 custom arrangement.</p>
               <p className="text-sm text-muted-foreground mt-2"></p>
-              <p className="text-2xl font-semibold mt-4">$250</p>
+              <p className="text-2xl font-semibold mt-4">$500</p>
             </div>
 
             <div className="rounded-2xl border bg-white p-7 shadow-sm lg:scale-[1.03] relative">
@@ -177,7 +177,7 @@ export function EventsWeddingsSection() {
               <h4 className="font-serif text-xl mt-2">Standard Song Requests</h4>
               <p className="text-sm text-muted-foreground mt-2">Includes repertoire and up to 5 custom arrangements.</p>
               <p className="text-sm text-muted-foreground mt-2"></p>
-              <p className="text-2xl font-semibold mt-4">$500</p>
+              <p className="text-2xl font-semibold mt-4">$750</p>
             </div>
 
             <div className="rounded-2xl border bg-white p-7 shadow-sm">
